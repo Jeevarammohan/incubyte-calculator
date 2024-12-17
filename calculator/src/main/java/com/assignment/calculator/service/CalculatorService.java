@@ -27,6 +27,6 @@ public class CalculatorService {
     }
 
     public boolean isNullOrEmpty(String numbers) {
-        return false;
+        return numbers == null || numbers.isEmpty();
     }
 }
