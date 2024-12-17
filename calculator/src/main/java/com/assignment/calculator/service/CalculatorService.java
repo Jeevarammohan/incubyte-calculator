@@ -19,16 +19,9 @@ public class CalculatorService {
             return 0;
         }
         String delimiter =",";
-        String numbersPart = numbers;
-        if(numbers.startsWith("//")){
-            int delimiterIndex = numbers.indexOf("\n");
-            if(delimiterIndex!=-1){
-                delimiter = numbers.substring(2,delimiterIndex);
-                numbersPart = numbers.substring(delimiterIndex+1);
-            }
-        }
+        Result result = getCustomDelimiter(numbers, delimiter, numbers);
         //splitting the numbers with ',' delimiter
-        String[] numberArray = numbersPart.replace("\n",delimiter).split(delimiter);
+        String[] numberArray = result.numbersPart().replace("\n", result.delimiter()).split(result.delimiter());
         int sum=0;
         //calculating the sum of numbers
         for(String number : numberArray){
@@ -41,6 +34,27 @@ public class CalculatorService {
         return sum;
 
     }
+
+    /**
+     * helper method to get the custom delimiter from the given input .
+     * @author Jeeva R
+     * @param numbers,delimiter,numbersPart - input to find the custom delimiter
+     * @return custom delimiter result.
+     */
+    private Result getCustomDelimiter(String numbers, String delimiter, String numbersPart) {
+        if(numbers.startsWith("//")){
+            int delimiterIndex = numbers.indexOf("\n");
+            if(delimiterIndex!=-1){
+                delimiter = numbers.substring(2,delimiterIndex);
+                numbersPart = numbers.substring(delimiterIndex+1);
+            }
+        }
+        return new Result(delimiter, numbersPart);
+    }
+
+    private record Result(String delimiter, String numbersPart) {
+    }
+
     /**
      * helper method to check whether the given input is null or empty .
      * @author Jeeva R

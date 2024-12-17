@@ -55,7 +55,7 @@ public class CalculatorServiceTest {
      * Verifies that the method correctly return true or false for validity
      */
     @Test
-    public void shouldReturnTrueForValidInput(){
+    public void shouldReturnTrueForNullOrEmptyInput(){
         boolean actual= calculatorService.isNullOrEmpty("");
         assertTrue(actual, "The input is invalid but result is false");
     }
@@ -82,7 +82,10 @@ public class CalculatorServiceTest {
         assertEquals(expected,actual, "The sum should be 8");
     }
 
-
+    /**
+     * Tests the add method handles input with custom delimiter.
+     * Verifies that the method correctly return sum
+     */
     @Test
     public void shouldHandleInputWithCustomDelimiter(){
         int expected =8;
