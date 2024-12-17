@@ -1,8 +1,7 @@
 package com.assignment.calculator.service;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
@@ -24,5 +23,31 @@ public class CalculatorServiceTest {
         int actual = calculatorService.addNumber(numbers);
         assertEquals(expected, actual, "The sum should be 15");
     }
+
+    /**
+     * Tests the addition of empty numbers/string.
+     * Verifies that the method correctly return 0 for empty string
+     */
+    @Test
+    public void shouldReturnZeroWhenEmptyNumber(){
+        String numbers = "";
+        int expected = 0;
+        int actual = calculatorService.addNumber(numbers);
+        assertEquals(expected, actual, "The sum should be 0");
+    }
+
+    /**
+     * Tests the addition of empty numbers/string.
+     * Verifies that the method correctly return 0 for empty string
+     */
+    @Test
+    public void shouldReturnZeroWhenNullInput(){
+
+        int expected = 0;
+        int actual = calculatorService.addNumber(null);
+        assertEquals(expected, actual, "The sum should be 0");
+    }
+
+
 
 }

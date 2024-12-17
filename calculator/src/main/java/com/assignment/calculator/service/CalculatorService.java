@@ -14,9 +14,6 @@ public class CalculatorService {
      * @return The sum of the numbers as an integer.
      */
     public int addNumber(String numbers) {
-        if(numbers==null || numbers.isEmpty()){
-            return 0;
-        }
         String[] numberArray = numbers.split(",");
         int sum=0;
         for(String number : numberArray){
