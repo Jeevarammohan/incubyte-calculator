@@ -2,9 +2,7 @@ package com.assignment.calculator.service;
 
 import org.junit.jupiter.api.Test;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for {@link CalculatorService}.
@@ -93,6 +91,24 @@ public class CalculatorServiceTest {
         assertEquals(expected,actual, "The sum should be 8");
     }
 
+    /**
+     * Tests the addition of numbers with multiple negative numbers.
+     * Verifies that an exception is thrown with the correct message listing all negative numbers.
+     */
+    @Test
+    public void shouldThrowExceptionForMultipleNegativeNumbers() {
+        // Prepare the input string with multiple negative numbers
+        String numbers = "1,-2,3,-4,5,-6";
+
+        // Perform the test and assert that the exception is thrown
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            calculatorService.addNumber(numbers);
+        });
+
+        // Verify the exception message
+        assertEquals("negative numbers not allowed -2,-4,-6", exception.getMessage(), "The exception message should list all negative numbers");
+
+    }
 
 
 
