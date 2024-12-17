@@ -1,5 +1,7 @@
 package com.assignment.calculator.controller;
 
+import com.assignment.calculator.service.CalculatorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,9 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class CalculatorController {
 
 
+    private final CalculatorService calculatorService;
+
+    public CalculatorController(CalculatorService calculatorService) {
+        this.calculatorService = calculatorService;
+    }
+
     @PostMapping("/add")
     public ResponseEntity<String> addNumbers(@RequestBody String numbers){
-        return ResponseEntity.ok("Sum is: " );
+        int sum = calculatorService.addNumber(numbers);
+        return ResponseEntity.ok("Sum is: "+sum );
     }
 
 }
