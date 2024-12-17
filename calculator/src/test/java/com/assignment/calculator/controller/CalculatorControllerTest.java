@@ -46,4 +46,15 @@ public class CalculatorControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Sum is: 15"));
     }
+    @Test
+    public void testAddNumbersWithNegativeNumbers() throws Exception {
+        // Mock the service call
+        when(calculatorService.addNumber("1,-2,3")).thenThrow(new IllegalArgumentException("negative numbers not allowed -2"));
+
+        mockMvc.perform(post("/api/v1/calculator/add")
+                        .content("1,-2,3")
+                        .contentType("application/json"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("negative numbers not allowed -2"));
+    }
 }
