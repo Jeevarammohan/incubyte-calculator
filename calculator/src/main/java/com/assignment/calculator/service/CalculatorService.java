@@ -1,6 +1,10 @@
 package com.assignment.calculator.service;
 
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A service that provides methods to perform various calculations.
  * Currently, it supports adding numbers provided in a comma-separated string.
@@ -23,12 +27,25 @@ public class CalculatorService {
         //splitting the numbers with ',' delimiter
         String[] numberArray = result.numbersPart().replace("\n", result.delimiter()).split(result.delimiter());
         int sum=0;
+        StringBuilder negativeNumbers = new StringBuilder();
         //calculating the sum of numbers
         for(String number : numberArray){
             if(!number.trim().isEmpty()){
-                sum+=Integer.parseInt(number.trim());
+                int num=Integer.parseInt(number.trim());
+                if(num<0){
+                    if(negativeNumbers.toString().isEmpty()){
+                        negativeNumbers.append(num);
+                    }
+                    else{
+                        negativeNumbers.append(",").append(num);
+                    }
+                }
+                sum+=num;
             }
 
+        }
+        if(!negativeNumbers.isEmpty()){
+            throw new IllegalArgumentException("negative numbers not allowed "+ negativeNumbers);
         }
         //returning the result
         return sum;
