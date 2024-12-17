@@ -67,7 +67,7 @@ public class CalculatorServiceTest {
     @Test
     public void shouldHandleNewLinesBetweenNumbers(){
         int expected =8;
-        int actual= calculatorService.addNumber("2\n,4,2\n");
+        int actual= calculatorService.addNumber("2\n4,2\n");
         assertEquals(expected,actual, "The sum should be 8");
     }
 

@@ -19,11 +19,14 @@ public class CalculatorService {
             return 0;
         }
         //splitting the numbers with ',' delimitter
-        String[] numberArray = numbers.split(",");
+        String[] numberArray = numbers.replace("\n",",").split(",");
         int sum=0;
         //calculating the sum of numbers
         for(String number : numberArray){
-            sum+=Integer.parseInt(number);
+            if(!number.trim().isEmpty()){
+                sum+=Integer.parseInt(number.trim());
+            }
+
         }
         //returning the result
         return sum;
