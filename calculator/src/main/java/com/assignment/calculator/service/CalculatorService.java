@@ -18,8 +18,17 @@ public class CalculatorService {
         if(isNullOrEmpty(numbers)){
             return 0;
         }
-        //splitting the numbers with ',' delimitter
-        String[] numberArray = numbers.replace("\n",",").split(",");
+        String delimiter =",";
+        String numbersPart = numbers;
+        if(numbers.startsWith("//")){
+            int delimiterIndex = numbers.indexOf("\n");
+            if(delimiterIndex!=-1){
+                delimiter = numbers.substring(2,delimiterIndex);
+                numbersPart = numbers.substring(delimiterIndex+1);
+            }
+        }
+        //splitting the numbers with ',' delimiter
+        String[] numberArray = numbersPart.replace("\n",delimiter).split(delimiter);
         int sum=0;
         //calculating the sum of numbers
         for(String number : numberArray){

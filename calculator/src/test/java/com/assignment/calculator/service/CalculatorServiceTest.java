@@ -86,7 +86,7 @@ public class CalculatorServiceTest {
     @Test
     public void shouldHandleInputWithCustomDelimiter(){
         int expected =8;
-        int actual= calculatorService.addNumber("\\:\n2:4:2 ");
+        int actual= calculatorService.addNumber("//:\n2:4:2 ");
         assertEquals(expected,actual, "The sum should be 8");
     }
 
