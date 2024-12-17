@@ -16,8 +16,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Tests for the {@link CalculatorController} class.
- * This test class focuses on verifying the behavior of the controller layer of the calculator API.
+ * Unit tests for the {@link CalculatorController} class.
+ * This test focuses on verifying the behavior of the controller layer for the calculator API.
+ * It tests the addition of numbers by sending a POST request to the '/api/v1/calculator/add' endpoint.
  */
 @WebMvcTest(CalculatorController.class)
 @Import(CalculatorService.class)
@@ -29,12 +30,26 @@ public class CalculatorControllerTest {
     private CalculatorController calculatorController;
 
     private MockMvc mockMvc;
-
+    /**
+     * Sets up the necessary environment for the test, initializing the {@link MockMvc} instance
+     * that will be used to perform the HTTP requests.
+     */
     @BeforeEach
     public void setup() {
         mockMvc = org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup(calculatorController).build();
     }
 
+    /**
+     * Tests the {@link CalculatorController#addNumbers(String)} method to verify that
+     * the controller correctly adds a series of numbers and returns the expected sum.
+
+     * Given a valid series of numbers in the request body (e.g., "1,2,3,4,5"), the controller
+     * should return the correct sum as part of the response.
+
+     * Expected outcome: The response should contain the string "Sum is: 15" with an HTTP 200 status.
+     *
+     * @throws Exception if there is any error while performing the request
+     */
     @Test
     public void shouldAddValidNumbers() throws Exception {
         String numbers = "1,2,3,4,5";
@@ -46,6 +61,18 @@ public class CalculatorControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Sum is: 15"));
     }
+
+    /**
+     * Tests the {@link CalculatorController#addNumbers(String)} method to verify that
+     * the controller correctly adds a series of numbers and returns the expected sum.
+
+     * Given a invalid series of numbers in the request body (e.g., "1,-2,3"), the controller
+     * should return the correct sum as part of the response if no negative is given.
+
+     * Expected outcome: The response should contain the string "negative numbers not allowed " with an HTTP 500 status.
+     *
+     * @throws Exception if there is any error while performing the request
+     */
     @Test
     public void testAddNumbersWithNegativeNumbers() throws Exception {
         // Mock the service call
