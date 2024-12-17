@@ -60,6 +60,28 @@ public class CalculatorServiceTest {
         assertTrue(actual, "The input is invalid but result is false");
     }
 
+    /**
+     * Tests the add method handles input with new line between number.
+     * Verifies that the method correctly return sum
+     */
+    @Test
+    public void shouldHandleNewLinesBetweenNumbers(){
+        int expected =8;
+        int actual= calculatorService.addNumber("2\n,4,2\n");
+        assertEquals(expected,actual, "The sum should be 8");
+    }
+
+    /**
+     * Tests the add method handles input with trailing space between number.
+     * Verifies that the method correctly return sum
+     */
+    @Test
+    public void shouldIgnoreTrailingNewLines(){
+        int expected =8;
+        int actual= calculatorService.addNumber("2 ,4,2 ");
+        assertEquals(expected,actual, "The sum should be 8");
+    }
+
 
 
 
