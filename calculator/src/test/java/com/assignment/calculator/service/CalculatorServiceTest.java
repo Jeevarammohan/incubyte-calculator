@@ -50,7 +50,10 @@ public class CalculatorServiceTest {
         assertEquals(expected, actual, "The sum should be 0");
     }
 
-
+    /**
+     * Tests the helper method of invalid input(null or empty string).
+     * Verifies that the method correctly return true or false for validity
+     */
     @Test
     public void shouldReturnTrueForValidInput(){
         boolean actual= calculatorService.isNullOrEmpty("");
