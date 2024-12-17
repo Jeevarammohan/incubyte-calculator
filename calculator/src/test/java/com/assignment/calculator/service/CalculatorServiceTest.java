@@ -37,8 +37,8 @@ public class CalculatorServiceTest {
     }
 
     /**
-     * Tests the addition of empty numbers/string.
-     * Verifies that the method correctly return 0 for empty string
+     * Tests the addition of null input.
+     * Verifies that the method correctly return 0 for null string
      */
     @Test
     public void shouldReturnZeroWhenNullInput(){
